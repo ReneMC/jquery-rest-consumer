@@ -2,38 +2,39 @@
 <html>
     <head>
         <title>JQuery REST consumer</title>
+        <!-- Load JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     </head>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-		$.ajax({ url: "https://api.fixer.io/latest?base=USD"})
-		.then(console.log("Fetching data"))
-        .then(function(data) {
+$(document).ready(function() {
+	$.ajax({ url: "http://api.fixer.io/latest?base=USD&symbols=MXN"})
+	.then(console.log("Fetching data"))
+    .then(function(data) {
 
-        	data.status = "Everything's OK :)";
+	data.status = "Everything's OK :)";
 
-           	$('#rate').append(data.rates.MXN);
-           	$('#date').append(data.date);
-           	$('#status').append(data.status);
-        }, function(error) {
-        	data = {
-        				"status":"Error :( <br> <strong>*This is probably due to a <a target='_blank' href='https://developers.google.com/web/fundamentals/security/prevent-mixed-content/what-is-mixed-content'> mixed content</a> issue. Previous results are hardcoded.</strong>",
-    					"base":"USD",
-    					"date":"The future",
-    					"rates": {			
-    						"BRL":3.1522,
-    						"CAD":1.3054,
-    						"JPY":101.36,
-    						"MXN":50.4281,
-    						"EUR":0.89662
-    					}
-    				}
-        	$('#rate').append(data.rates.MXN);
-           	$('#date').append(data.date);
-           	$('#status').append(data.status);
-        });
+   	$('#rate').append(data.rates.MXN);
+   	$('#date').append(data.date);
+   	$('#status').append(data.status);
+
+    }, 	function(error) {
+    	data = 
+    	{
+			"status":"Error :( - Previous results are hardcoded.",
+			"base":"USD",
+			"date":"The future",
+			"rates": {			
+				"MXN":50.4281
+			}
+		}
+
+    	$('#rate').append(data.rates.MXN);
+       	$('#date').append(data.date);
+       	$('#status').append(data.status);
+
     });
+});
 </script>
 
 <body>
